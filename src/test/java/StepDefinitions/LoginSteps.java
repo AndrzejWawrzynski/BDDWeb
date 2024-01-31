@@ -37,9 +37,39 @@ public class LoginSteps {
     @Then("Uzytkownik zostal poprawnie zalogowany")
     public void UzytkownikZostalPoprawnieZalogowany() {
         Assert.assertEquals("https://the-internet.herokuapp.com/secure", driver.getCurrentUrl());
-        driver.quit();
+        driver.close();
         //System.out.println("Uzytkownik zostal poprawnie zalogowany");
     }
+    //Scenario 2
+    @When("Uzytkownik wpisuje niepoprawne haslo")
+    public void UzytkownikWpisujeNiepoprawneHaslo() {
+        driver.findElement(By.id("password")).sendKeys("test");
+    }
+    @Then("Uzytkownik nie zostal poprawnie zalogowany")
+    public void UzytkownikNieZostalPoprawnieZalogowany() {
+        Assert.assertEquals("https://the-internet.herokuapp.com/login", driver.getCurrentUrl());
+        driver.close();
+    }
 
+    //Given Uzytkownik jest na stronie "https://the-internet.herokuopp.com/loqin*
+    @Given("Uzytkownik jest na stronie {string}")
+    public void UzytkomnikJestNaStronie(String url) {
+        System.setProperty("webdriver.chrome.driver", "/Users/andy/Downloads/chromedriver/chromedriver");
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.navigate().to(url);
+    }
+
+    //When Uzytkownik wpisuje Login "tomsmith"
+    @When("Uzytkownik wpisuje login {string}")
+    public void UzytkownikWpisujeLogin(String nazwaUzytkownika){
+        driver.findElement(By.id("username")).sendKeys(nazwaUzytkownika);
+        }
+
+    // And Uzytkownik wpisuje haslo "SupersecretPassword!"
+    @When ("Uzytkownik wpisuje haslo {string}")
+    public void UzytkownikWpisujeHaslo(String haslo) {
+        driver.findElement(By.name("password")).sendKeys(haslo);
+    }
 }
 
