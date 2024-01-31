@@ -3,6 +3,7 @@ package StepDefinitions;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,17 +26,19 @@ public class LoginSteps {
     }
     @When("Uzytkownik wpisuje poprawne haslo")
     public void UzytkownikWpisujePoprawneHaslo() {
-        WebElement inputPassword = driver.findElement(By.id("password"));
-        inputPassword.sendKeys("SuperSecretPassword!");
+        driver.findElement(By.id("password")).sendKeys("SuperSecretPassword!");
         //System.out.println("Uzytkownik wpisuje poprawne haslo");
     }
     @When("Uzytkownik klika przycisk Login")
     public void UzytkownikKlikaPrzyciskLogin() {
-        System.out.println("Uzytkownik klika przycisk Login");
+        driver.findElement(By.xpath("/html/body/div[2]/div/div/form/button")).click();
+        //System.out.println("Uzytkownik klika przycisk Login");
     }
     @Then("Uzytkownik zostal poprawnie zalogowany")
     public void UzytkownikZostalPoprawnieZalogowany() {
-        System.out.println("Uzytkownik zostal poprawnie zalogowany");
+        Assert.assertEquals("https://the-internet.herokuapp.com/secure", driver.getCurrentUrl());
+        driver.quit();
+        //System.out.println("Uzytkownik zostal poprawnie zalogowany");
     }
 
 }
