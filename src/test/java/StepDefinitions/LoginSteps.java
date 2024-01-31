@@ -13,7 +13,7 @@ public class LoginSteps {
     WebDriver driver;
     @Given("Uzytkownik musi byc na stronie logowania")
     public void UzytkownikJestNaStronieLogowania(){
-        //System.setProperty("webdriver.chrome.driver", "//users//andy//chromedriver");
+        System.setProperty("webdriver.chrome.driver", "/Users/andy/Downloads/chromedriver/chromedriver");
         driver = new ChromeDriver();
         driver.navigate().to("https://the-internet.herokuapp.com/login");
         //System.out.println("Uzytkownik jest na stronie logowania");
