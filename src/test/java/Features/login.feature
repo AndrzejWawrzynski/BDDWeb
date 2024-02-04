@@ -25,7 +25,7 @@ Feature: Logowanie do aplikacji
 
   #Scenario: Otwarcie strony BBC
     #Given Uzytkownik jest na stronie "https://www.bbc.com/"
-  @new
+
   Scenario: Logowanie do aplikacji 3
     Given Uzytkownik jest na stronie "https://the-internet.herokuapp.com/login"
     When Uzytkownik wpisuje login "tomsmith"
