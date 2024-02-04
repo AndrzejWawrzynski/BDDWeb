@@ -57,7 +57,7 @@ Feature: Logowanie do aplikacji
     And Uzytkownik klika przycisk Login
     Then Uzytkownik nie zostal poprawnie zalogowany
 
-  @new
+
   Scenario Outline: Logowanie do aplikacji
     Given Uzytkownik jest na stronie "https://the-internet.herokuapp.com/login"
     When Uzytkownik wpisuje login2 "<login2>"

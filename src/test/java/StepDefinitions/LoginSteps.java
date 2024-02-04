@@ -1,5 +1,7 @@
 package StepDefinitions;
 
+import io.cucumber.java.AfterAll;
+import io.cucumber.java.BeforeAll;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -11,12 +13,19 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class LoginSteps {
-    WebDriver driver;
+
+    static WebDriver driver;
+
+    @BeforeAll
+    public static void setUp() {
+        System.setProperty("webdriver.chrome.driver", "/Users/andy/Downloads/chromedriver/chromedriver");
+        driver = new ChromeDriver();
+    }
 
     @Given("Uzytkownik musi byc na stronie logowania")
     public void UzytkownikJestNaStronieLogowania() {
-        System.setProperty("webdriver.chrome.driver", "/Users/andy/Downloads/chromedriver/chromedriver");
-        driver = new ChromeDriver();
+        // System.setProperty("webdriver.chrome.driver", "/Users/andy/Downloads/chromedriver/chromedriver");
+        // driver = new ChromeDriver();
         driver.navigate().to("https://the-internet.herokuapp.com/login");
         //System.out.println("Uzytkownik jest na stronie logowania");
     }
@@ -43,7 +52,7 @@ public class LoginSteps {
     @Then("Uzytkownik zostal poprawnie zalogowany")
     public void UzytkownikZostalPoprawnieZalogowany() {
         Assert.assertEquals("https://the-internet.herokuapp.com/secure", driver.getCurrentUrl());
-        driver.close();
+        //driver.close();
         //System.out.println("Uzytkownik zostal poprawnie zalogowany");
     }
 
@@ -56,15 +65,15 @@ public class LoginSteps {
     @Then("Uzytkownik nie zostal poprawnie zalogowany")
     public void UzytkownikNieZostalPoprawnieZalogowany() {
         Assert.assertEquals("https://the-internet.herokuapp.com/login", driver.getCurrentUrl());
-        driver.close();
+        //driver.close();
     }
 
     //Given Uzytkownik jest na stronie "https://the-internet.herokuopp.com/loqin*
     @Given("Uzytkownik jest na stronie {string}")
     public void UzytkomnikJestNaStronie(String url) {
-        System.setProperty("webdriver.chrome.driver", "/Users/andy/Downloads/chromedriver/chromedriver");
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
+        // System.setProperty("webdriver.chrome.driver", "/Users/andy/Downloads/chromedriver/chromedriver");
+        //  driver = new ChromeDriver();
+        // driver.manage().window().maximize();
         driver.navigate().to(url);
     }
 
@@ -100,6 +109,11 @@ public class LoginSteps {
     @And("Uzytkownik wpisuje haslo2 {string}")
     public void UzytkownikWpisujeHaslo2(String password2) {
         driver.findElement(By.name("password")).sendKeys(password2);
+    }
+
+    @AfterAll
+    public static void tearDown() {
+        driver.close();
     }
 }
 
